@@ -6,6 +6,10 @@ const calibrationFile = `https://centrala.ag3nts.org/data/${config.centralaApiKe
 const flag = "";
 const centralaHandler = new CentralaHandler(answerUrl);
 
+interface Calculation {
+  answer: number;
+  question: string;
+}
 export class App {
   private centralaHandler: CentralaHandler;
 
@@ -27,17 +31,32 @@ export class App {
     }
   }
 
-  private processData(data: any): string {
-    // Tu dodaj logikę przetwarzania danych i generowania flagi
-    // Na razie zwracamy pustą flagę
-    return "";
+  async processData(data: any) {
+    try {
+      console.log("Starting processData"); // debug log
+      if (!data || !data["test-data"]) {
+        throw new Error("Invalid data format");
+      }
+
+      for (const item of data["test-data"]) {
+        const expressionValue = calculateExpression(item.question);
+        if (expressionValue !== item.answer) {
+          item.answer = expressionValue;
+        }
+      }
+      console.log("Finished processData"); // debug log
+      return true; // lub inną wartość zamiast pustego stringa
+    } catch (error) {
+      console.error("Error processing data:", error); // poprawiony message
+      throw error;
+    }
   }
 
   async run() {
     try {
       console.log("Loading calibration data...");
       const data = await this.loadFile(calibrationFile);
-      const flag = this.processData(data);
+      const flag = await this.processData(data);
       //   console.log("Sending flag to centrala...");
 
       //   const response = await this.centralaHandler.sendMessage({
@@ -51,5 +70,34 @@ export class App {
       console.error("Error in run:", error);
       throw error;
     }
+  }
+}
+
+function calculateExpression(expression: string): number {
+  // Usuń spacje i podziel na części
+  const cleanExpression = expression.replace(/\s+/g, "");
+
+  // Użyj eval() do obliczenia wyniku
+  // return eval(cleanExpression);
+
+  // Bezpieczniejsza alternatywa dla eval():
+  const [num1, operator, num2] =
+    cleanExpression.match(/(\d+)([+\-*/])(\d+)/)?.slice(1) ?? [];
+
+  if (!num1 || !operator || !num2) {
+    throw new Error("Invalid expression format");
+  }
+
+  switch (operator) {
+    case "+":
+      return parseInt(num1) + parseInt(num2);
+    case "-":
+      return parseInt(num1) - parseInt(num2);
+    case "*":
+      return parseInt(num1) * parseInt(num2);
+    case "/":
+      return parseInt(num1) / parseInt(num2);
+    default:
+      throw new Error("Nieobsługiwany operator");
   }
 }
