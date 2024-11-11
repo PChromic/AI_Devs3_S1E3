@@ -1,5 +1,5 @@
 import { AIPromptService } from "./AIPromptService";
-import { CentralaHandler, CentralaMessage } from "./CentralaHandler";
+import { CentralaHandler, CentralaMessage } from "../common/CentralaHandler";
 import { config } from "../config";
 import { AuthMessage, MessageHandler } from "./MessageHandler";
 import { OpenAIService } from "./OpenAIService";

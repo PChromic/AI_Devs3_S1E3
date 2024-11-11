@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
     "build": "tsc",
-    "dev": "ts-node-dev --respawn index.ts",
-    "debug": "node --inspect-brk ts-node index.ts"
+    "start_s1e2": "ts-node s1e2/index.ts",
+    "dev_s1e2": "ts-node-dev --respawn s1e2/index.ts",
+    "debug_s1e2": "node --inspect-brk ts-node s1e2/index.ts",
+    "start_s1e3": "ts-node s1e3/index.ts",
+    "dev_s1e3": "ts-node-dev --respawn s1e3/index.ts",
+    "debug_s1e3": "node s1e3/index.ts"
   },
   "keywords": [],
   "author": "",
