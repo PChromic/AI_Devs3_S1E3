@@ -10,6 +10,13 @@ interface Calculation {
   answer: number;
   question: string;
 }
+interface CalibrationData {
+  apiKey: string;
+  description: string;
+  copyright: string;
+  "test-data": Calculation[];
+}
+
 export class App {
   private centralaHandler: CentralaHandler;
 
@@ -17,7 +24,7 @@ export class App {
     this.centralaHandler = new CentralaHandler(answerUrl);
   }
 
-  async loadFile(url: string) {
+  async loadFile(url: string): Promise<CalibrationData> {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -55,8 +62,8 @@ export class App {
   async run() {
     try {
       console.log("Loading calibration data...");
-      const data = await this.loadFile(calibrationFile);
-      const flag = await this.processData(data);
+      const data = this.loadFile(calibrationFile);
+      const flag = this.processData(data);
       //   console.log("Sending flag to centrala...");
 
       //   const response = await this.centralaHandler.sendMessage({
