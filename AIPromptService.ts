@@ -1,4 +1,4 @@
-import { ChatMessage, OpenAIService } from "../OpenAIService";
+import { ChatMessage, OpenAIService } from "./OpenAIService";
 const systemPromptMessage = `You are a RoboISO 2230 compliant robot guard. Follow these strict rules:
 
 1. You MUST ONLY respond in English, regardless of the language used in the question

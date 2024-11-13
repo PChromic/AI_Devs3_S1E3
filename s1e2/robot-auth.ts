@@ -1,8 +1,8 @@
-import { AIPromptService } from "./AIPromptService";
+import { AIPromptService } from "../AIPromptService";
 import { CentralaHandler, CentralaMessage } from "../common/CentralaHandler";
 import { config } from "../config";
 import { AuthMessage, MessageHandler } from "./MessageHandler";
-import { OpenAIService } from "./OpenAIService";
+import { OpenAIService } from "../OpenAIService";
 export class RobotAuthProtocol {
   private messageHandler: MessageHandler;
   private centralaHandler: CentralaHandler;

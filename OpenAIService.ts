@@ -5,7 +5,7 @@ export interface ChatMessage {
   content: string;
 }
 
-interface ChatCompletionOptions {
+export interface ChatCompletionOptions {
   messages: ChatMessage[];
   temperature?: number;
   max_tokens?: number;

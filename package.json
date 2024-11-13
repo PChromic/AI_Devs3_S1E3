@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start_s1e2": "ts-node s1e2/index.ts",
-    "dev_s1e2": "ts-node-dev --respawn s1e2/index.ts",
-    "debug_s1e2": "node --inspect-brk ts-node s1e2/index.ts",
-    "start_s1e3": "ts-node s1e3/index.ts",
-    "dev_s1e3": "ts-node-dev --respawn s1e3/index.ts",
-    "debug_s1e3": "node s1e3/index.ts"
+    "build": "bun build",
+    "start_s1e2": "bun run s1e2/index.ts",
+    "dev_s1e2": "bun --watch s1e2/index.ts",
+    "debug_s1e2": "bun --inspect s1e2/index.ts",
+    "start_s1e3": "bun run robot-auth/s1e3/index.ts",
+    "dev_s1e3": "bun --watch s1e3/index.ts",
+    "debug_s1e3": "bun --inspect s1e3/index.ts"
   },
   "keywords": [],
   "author": "",
